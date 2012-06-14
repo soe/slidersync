@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+		<title>jQuery UI SliderSync</title>
+		
+		<link type="text/css" href="highlighter/highlighter.css" rel="stylesheet" />
+		<script type="text/javascript" src="highlighter/highlighter.js"></script>
+		<script>hljs.initHighlightingOnLoad();</script>
+		
+		<link type="text/css" href="css/smoothness/jquery-ui-1.8.21.custom.css" rel="stylesheet" />
+		<link type="text/css" href="css/slidersync.css" rel="stylesheet" />
+		
+		<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+		<script type="text/javascript" src="js/jquery-ui-1.8.21.custom.min.js"></script>
+		<script type="text/javascript" src="js/jquery-ui-slidersync.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				// Tabs
+				$('.tabs').tabs();
+				
+				// minimal call to render slidersync
+				$('#demo1-ss').slidersync();
+				
+				$('#demo2-ss').slidersync({
+				  'sliders': [90, 80, 80, 100], // 4 sliders
+				  'vals': 'left', // put vals on the left
+				  'val_suffix': '%', // suffix vals with '%'
+				  'orientation': 'horizontal' // horizontal
+				});
+
+				$('#demo3-ss').slidersync({
+          'sliders': [20, 80, 80, 90, 100, 30, 20, 10], // 8 sliders
+          'vals': 'bottom', // put vals at the bottom
+          'val_suffix': '%', // suffix vals with '%'
+          'orientation': 'vertical' // vertical
+        });
+        
+        $('#demo4-ss').slidersync({
+          'sliders': [30, 25, 80, 90, 120], // 5 sliders 
+          'min': 20, // set min to 20
+          'max': 120, // set max to 120
+          'vals': 'top', // put vals at the top
+          'val_prefix': 'e', // prefix vals with 'e'
+          'orientation': 'vertical' // vertical
+        });
+			});
+		</script>
+		<style type="text/css">
+			/*demo page css*/
+			body{ font: 12px "Trebuchet MS", sans-serif; line-height: 1.6; margin: 50px; }
+			h2 { margin-top: 2em; }
+			.tabs { width: 80%; }
+			
+			p {
+			  font-size: 106%; line-height: 1.6; margin: 1em 0; width: 80%;
+			}
+			code {
+        padding: 2px;
+        border: 1px solid #eee;
+      }
+      p.small {
+        font-size: 94%;
+      }
+      h4 { margin-bottom: 0; }
+      .tabs pre { background: #f8f8f8; padding: 3px; }
+      .tabs pre:hover { background: #eee; }
+		</style>
+	</head>
+	<body>
+	<h1>Welcome to jQuery UI SliderSync!</h1>
+  <div class="tabs">
+    <ul>
+			<li><a href="#overview">Overview</a></li>
+			<li><a href="#features">Features</a></li>
+			<li><a href="#options">Options</a></li>
+			<li><a href="#snippets">Snippets</a></li>
+		</ul>
+		<div id="overview">
+		  This page demonstrates SliderSync functionality. This functionality is implemented as a jQuery plugin. Three javascript files are included in this page: <a href="js/jquery-1.7.2.min.js">jQuery (js/jquery-1.7.2.minljs)</a>, your personalized copy of <a href="js/jquery-ui-1.8.21.custom.min.js">jQuery UI (js/jquery-ui-1.8.21.custom.min.js)</a>, and <a href="js/jquery-ui-slidersync.js">SliderSync (js/jquery-ui-slidersync.js)</a>. jQuery UI theme is also included here: <a href="css/smoothness/jquery-ui-1.8.21.custom.css">Smoothness (css/smoothness/jquery-ui-1.8.21.custom.css)</a> which imports the entire jQuery UI CSS Framework. You can build your own custom theme here: <a href="http://jqueryui.com/" target="_blank">http://jqueryui.com/</a>. SliderSync also has a short stylesheet: <a href="js/slidersync.css">slidersync.css</a>.
+		</div>
+		<div id="features">
+		  <ul>
+        <li>Implemented as a jQuery plugin</li>
+        <li>Using jQuery UI</li>
+        <li>jQuery UI themes compatible</li>
+        <li>Multiple SliderSync(s) on a page</li>
+        <li>Minimal DOM usage for optimal performance</li>
+        <li>Respect min/max values of sliders and rollback changes if they exceed these limits</li>
+        <li>Vertical and horizontal sliders</li>
+        <li>Layout easily definable</li>
+        <li>Simple <a href="test.html">visual tests</a> included</li>
+      </ul>
+		</div>
+		<div id="options">
+		  <h4>sliders</h4>
+		  <p class="small">list of sliders' values for which sliders will be rendered</p>
+		  <pre><i>false or list of integers</i>. <b>default:</b> false. <b>example:</b> [30, 20, 80]</pre>
+		  <h4>vals</h4>
+		  <p class="small">show values of sliders</p>
+		  <pre><i>false or top, bottom, left, right</i>. <b>default:</b> false.</pre>
+		  <h4>val_prefix</h4>
+		  <p class="small">prefix string for values of sliders</p>
+		  <pre><i>false or string</i>. <b>default:</b> false.</pre>
+		  <h4>val_suffix</h4>
+		  <p class="small">suffix string for values of sliders</p>
+		  <pre><i>false or string</i>. <b>default:</b> false. <b>example:</b> %</pre>
+		  <h4>range</h4>
+		  <p class="small">bind slider to mininum or maximum.</p>
+		  <pre><i>min or max</i>. <b>default:</b> min.</pre>
+		  <h4>min</h4>
+		  <p class="small">minimum value of slider</p>
+		  <pre><i>integer</i>. <b>default:</b> 0.</pre>
+		  <h4>max</h4>
+		  <p class="small">maximum value of slider</p>
+		  <pre><i>integer</i>. <b>default:</b> 100.</pre>
+		  <h4>animate</h4>
+		  <p class="small">animate slider handle</p>
+		  <pre><i>false or true</i>. <b>default:</b> false.</pre>
+		  <h4>orientation</h4>
+		  <p class="small">orientation of sliders</p>
+		  <pre><i>horizontal or vertical</i>. <b>default:</b> vertical.</pre>
+		</div>
+		<div id="snippets">
+		  <h4>get total value</h4>
+		  <pre><code>
+var total = 0;
+$('#demo1-ss .slider').each(function() {
+  total += $(this).slider('value');
+});	
+alert(total);	    
+		  </code></pre>
+		</div>
+  </div>
+  <h2>Tests</h2>
+  <p><a href="test.html">Visual tests here</a></p>
+  <h2>Demos</h2>
+  <p>View JS source and HTML source to see the code structure</p>
+  <ul>
+    <li><a href="#demo1">Horizontal Sliders (with HTML structure)</a></li>
+    <li><a href="#demo2">Horizontal Sliders (with JS structure)</a></li>
+    <li><a href="#demo3">Vertical Sliders (with JS structure)</a></li>
+    <li><a href="#demo4">Vertical Sliders (custom styles)</a></li>
+  </ul>
+	<!-- Demo1 -->
+	<a name="demo1"></a>
+	<h2>Horizontal Sliders (with HTML structure)</h2>
+	<div class="tabs">
+		<ul>
+			<li><a href="#demo1-1">Demo</a></li>
+			<li><a href="#demo1-2">JS Source</a></li>
+			<li><a href="#demo1-3">HTML Source</a></li>
+		</ul>
+		<div id="demo1-1">
+		  <div id="demo1-ss" class="slidersync horizontal">
+		    <span class="slider">90</span>
+		    <span class="slider">70</span>
+		    <span class="slider">30</span>
+		    <span class="slider">20</span>
+		  </div>
+		</div>
+		<div id="demo1-2">
+      <pre><code>
+// minimal call to render slidersync
+$('#demo1-ss').slidersync();
+      </code></pre>
+		</div>
+		<div id="demo1-3">
+      <pre><code>
+&lt;div id="demo1-ss" class="slidersync horizontal"&gt;
+  &lt;span class="slider"&gt;90&lt;/span&gt;
+  &lt;span class="slider"&gt;70&lt;/span&gt;
+  &lt;span class="slider"&gt;30&lt;/span&gt;
+  &lt;span class="slider"&gt;20&lt;/span&gt;
+&lt;/div&gt;
+      </code></pre>
+		</div>
+
+	</div>
+	
+	<!-- Demo2 -->
+	<a name="demo2"></a>
+	<h2>Horizontal Sliders (with JS structure)</h2>
+	<div class="tabs">
+		<ul>
+			<li><a href="#demo2-1">Demo</a></li>
+			<li><a href="#demo2-2">JS Source</a></li>
+			<li><a href="#demo2-3">HTML Source</a></li>
+		</ul>
+		<div id="demo2-1">
+		  <div id="demo2-ss" class="slidersync horizontal">
+		  </div>
+		  <div style="clear: both;"></div>
+		</div>
+		<div id="demo2-2">
+      <pre><code>
+$('#demo2-ss').slidersync({
+  'sliders': [90, 80, 80, 100], // 4 sliders
+  'vals': 'left', // put vals on the left
+  'val_suffix': '%', // suffix vals with '%'
+  'orientation': 'horizontal' // horizontal
+});
+      </code></pre>
+		</div>
+		<div id="demo2-3">
+      <pre><code>
+&lt;div id="demo2-ss" class="slidersync horizontal"&gt;&lt;/div&gt;
+&lt;div style="clear: both;"&gt;&lt;/div&gt;
+      </code></pre>
+		</div>
+	</div>
+
+	<!-- Demo3 -->
+	<a name="demo3"></a>
+	<h2>Vertical Sliders (with JS structure)</h2>
+	<div class="tabs">
+		<ul>
+			<li><a href="#demo3-1">Demo</a></li>
+			<li><a href="#demo3-2">JS Source</a></li>
+			<li><a href="#demo3-3">HTML Source</a></li>
+		</ul>
+		<div id="demo3-1">
+		  <div id="demo3-ss" class="slidersync vertical">
+		  </div>
+		  <div style="clear: both;"></div>
+		</div>
+		<div id="demo3-2">
+      <pre><code>
+$('#demo3-ss').slidersync({
+  'sliders': [20, 80, 80, 90, 100, 30, 20, 10], // 8 sliders
+  'vals': 'bottom', // put vals at the bottom
+  'val_suffix': '%', // suffix vals with '%'
+  'orientation': 'vertical' // vertical
+});
+      </code></pre>
+		</div>
+		<div id="demo3-3">
+      <pre><code>
+&lt;div id="demo3-ss" class="slidersync vertical"&gt;&lt;/div&gt;
+      </code></pre>
+		</div>
+	</div>
+	
+	<!-- Demo4 -->
+	<a name="demo4"></a>
+	<h2>Vertical Sliders (custom styles)</h2>
+	<div class="tabs">
+		<ul>
+			<li><a href="#demo4-1">Demo</a></li>
+			<li><a href="#demo4-2">JS Source</a></li>
+			<li><a href="#demo4-3">HTML Source</a></li>
+		</ul>
+		<style type="text/css">
+
+		  #demo4-ss .slider:nth-child(1) .ui-slider-range {
+		    background: blue;
+		  }
+		  #demo4-ss .slider:nth-child(2) .ui-slider-range {
+		    background: red;
+		  }
+		  #demo4-ss .slider:nth-child(3) .ui-slider-range {
+		    background: yellow;
+		  }
+		  #demo4-ss .slider:nth-child(4) .ui-slider-range {
+		    background: green;
+		  }
+		  #demo4-ss .slider:nth-child(5) .ui-slider-range {
+		    background: black;
+		  }
+		  #demo4-ss .slider .ui-slider-handle {
+		    border-color: #666;
+		  }
+		</style>
+		<div id="demo4-1">
+		  <div id="demo4-ss" class="slidersync vertical">
+		  </div>
+		</div>
+		<div id="demo4-2">
+      <pre><code>   
+$('#demo4-ss').slidersync({
+  'sliders': [30, 25, 80, 90, 120], // 5 sliders 
+  'min': 20, // set min to 20
+  'max': 120, // set max to 120
+  'vals': 'top', // put vals at the top
+  'val_prefix': 'e', // prefix vals with 'e'
+  'orientation': 'vertical' // vertical
+});
+      </code></pre>
+		</div>
+		<div id="demo4-3">
+      <pre><code>
+&lt;div id="demo4-ss" class="slidersync vertical"&gt;&lt;/div&gt;
+&lt;!-- custom styling --&gt;
+&lt;style type="text/css"&gt;
+
+  #demo4-ss .slider:nth-child(1) .ui-slider-range {
+    background: blue;
+  }
+  #demo4-ss .slider:nth-child(2) .ui-slider-range {
+    background: red;
+  }
+  #demo4-ss .slider:nth-child(3) .ui-slider-range {
+    background: yellow;
+  }
+  #demo4-ss .slider:nth-child(4) .ui-slider-range {
+    background: green;
+  }
+  #demo4-ss .slider:nth-child(5) .ui-slider-range {
+    background: black;
+  }
+  #demo4-ss .slider .ui-slider-handle {
+    border-color: #666;
+  }
+&lt;/style&gt;
+      </code></pre>
+		</div>
+	</div>
+	</body>
+</html>

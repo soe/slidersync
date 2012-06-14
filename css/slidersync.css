@@ -1,0 +1,60 @@
+/* horizontal slidersync */
+.slidersync.horizontal {
+  clear: both;
+}
+
+.slidersync.horizontal .vals {
+  float: left;
+  width: 58px;
+  padding: 12px 4px;
+}
+
+.slidersync.horizontal .val {
+  display: block;
+  padding-top: 1px;
+  height: 27px;
+  margin-bottom: 4px;
+}
+
+.slidersync.horizontal .val input {
+  text-align: right;
+  width: 26px;
+  border: 0;
+}
+
+.slidersync.horizontal .sliders {
+  float: left;
+}
+
+.slidersync.horizontal .slider {
+	width: 300px; 
+	margin: 20px 10px; 
+	display: block;
+}
+
+/* horizontal slidersync */
+.slidersync.vertical .vals {
+  clear: both;
+}
+
+.slidersync.vertical .val {
+  display: inline-block;
+  width: 54px;
+  margin-right: 8px;
+}
+
+.slidersync.vertical .val > input {
+  width: 26px;
+  margin: 2px;
+  border: 0;
+  text-align: right;
+}
+
+.slidersync.vertical .sliders {
+}
+
+.slidersync.vertical .slider {
+  display: inline-block;
+	height: 240px; 
+	margin: 15px 24px;
+}

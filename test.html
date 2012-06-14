@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+		<title>jQuery UI SliderSync</title>
+		
+		<link type="text/css" href="highlighter/highlighter.css" rel="stylesheet" />
+		<script type="text/javascript" src="highlighter/highlighter.js"></script>
+		<script>hljs.initHighlightingOnLoad();</script>
+		
+		<link type="text/css" href="css/smoothness/jquery-ui-1.8.21.custom.css" rel="stylesheet" />
+		<link type="text/css" href="css/slidersync.css" rel="stylesheet" />
+		
+		<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+		<script type="text/javascript" src="js/jquery-ui-1.8.21.custom.min.js"></script>
+		<script type="text/javascript" src="js/jquery-ui-slidersync.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				
+				$('#test1-ss').slidersync({
+          'sliders': [10, 10, 10, 10, 10, 10], // 5 sliders
+          'vals': 'bottom', // put vals at the bottom
+          'val_suffix': '%', // suffix vals with '%'
+          'orientation': 'vertical' // vertical
+        });
+
+        var total = 0;
+        $('#test1-ss .slider').each(function() {
+          total += $(this).slider('value');
+        });	
+        
+        $('#test1-ta .initial-total').text(total);
+        $('#test1-ta .changed-total').text(total);
+        
+        $('#test1-ss').on("slidersynced", function(event) {
+          var total = 0;
+          $('#test1-ss .slider').each(function() {
+            total += $(this).slider('value');
+          });
+          $('#test1-ta .changed-total').text(total);
+          $('#test1-ta .changed-total')
+            .fadeIn('fast').delay(100)
+            .fadeOut('slow').delay(100).fadeIn('fast');
+        });
+        
+				$('#test2-ss').slidersync({
+          'sliders': [90, 90, 90, 90, 90, 90], // 5 sliders
+          'vals': 'bottom', // put vals at the bottom
+          'val_suffix': '%', // suffix vals with '%'
+          'orientation': 'vertical' // vertical
+        });
+        
+        var total = 0;
+        $('#test2-ss .slider').each(function() {
+          total += $(this).slider('value');
+        });	
+        
+        $('#test2-ta .initial-total').text(total);
+        $('#test2-ta .changed-total').text(total);
+        
+        $('#test2-ss').on("slidersynced", function(event) {
+          var total = 0;
+          $('#test2-ss .slider').each(function() {
+            total += $(this).slider('value');
+          });
+          $('#test2-ta .changed-total').text(total);
+          $('#test2-ta .changed-total')
+            .fadeIn('fast').delay(100)
+            .fadeOut('slow').delay(100).fadeIn('fast');
+        });
+        
+			});
+		</script>
+		<style type="text/css">
+			/*demo page css*/
+			body{ font: 12px "Trebuchet MS", sans-serif; line-height: 1.6; margin: 50px; }
+			h2 { margin-top: 4px; }
+			h1 { margin-bottom: 2px; }
+			.tabs { width: 80%; }
+			
+			p {
+			  font-size: 106%; line-height: 1.6; margin: 1em 0; width: 80%;
+			}
+
+      .test {
+        float: left;
+        padding: 4px;
+        width: 49%;
+      }
+      .changed-total { padding: 2px 8px; background: #fe1; }
+      #test1-ss .slider .ui-slider-range {
+        background: blue;
+      }
+      
+      #test2-ss .slider .ui-slider-range {
+        background: green;
+      }
+      .test-area { background: #f8f8f8; }
+		</style>
+	</head>
+	<body>
+	<h1>Visual tests! (2 tests)</h1>
+  <div class="test">
+    <h2>Test 1</h1>
+    <div id="test1-ta" class="test-area">
+      Initial total: <span class="initial-total"></span><br />
+      Changed total: <span class="changed-total"></span><br />
+      The above two values should always be the same.<br />
+      Bring up any slider to the top, it shouldn't touch the top.
+    </div>
+    <div id="test1-ss" class="slidersync vertical"></div>
+  </div>
+  
+  <div class="test">
+    <h2>Test 2</h1>
+    <div id="test2-ta" class="test-area">
+      Initial total: <span class="initial-total"></span><br />
+      Changed total: <span class="changed-total"></span><br />
+      The above two values should always be the same.<br />
+      Bring down any slider to the bottom, it shouldn't touch the bottom.
+    </div>
+    <div id="test2-ss" class="slidersync vertical"></div>
+  </div>
+	</body>
+</html>
